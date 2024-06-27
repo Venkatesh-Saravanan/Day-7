@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task(a)</title>
+</head>
+<body>
+    <script>
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET","https://restcountries.com/v3.1/all",true);
+        xhr.send();
+        xhr.onload = function()
+        {
+            if(xhr.status>=200 && xhr.status<300)
+            {
+                var response = JSON.parse(xhr.responseText);
+                console.log(response);
+                let asiacountries = response.filter((a) => {
+                    return a.continents[0] === "Asia";
+                })
+                .map((countries) => {
+                    return countries.name.official;
+                });
+                console.log("asiacountries", asiacountries);
+               
+            }
+            else
+            {
+                console.log("The Request Failed");
+            }
+        }
+    </script>
+</body>
+</html>
